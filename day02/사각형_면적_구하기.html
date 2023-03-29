@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    가로 : <input type="text" name="xvalue" id="xvalue" /><br />
+    세로 : <input type="text" name="yvalue" id="yvalue" /><br />
+
+    <button type="text" onclick="recCal()">=</button>
+    result : <span id="result"></span><br />
+
+    이름 : <input type="text" name="name" id="name" /><br />
+    시간 : <input type="text" name="hour" id="hour" /><br />
+    급여 : <input type="text" name="pay" id="pay" /><br />
+
+    <button type="text" onclick="salary()">=</button>
+    <button type="button" onclick="goClear()">리셋</button><br />
+    result : <span id="result2"></span>
+  </body>
+</html>
+
+<script>
+  function recCal() {
+    x = document.getElementById("xvalue").value;
+    y = document.getElementById("yvalue").value;
+
+    result = parseInt(x) * parseInt(y);
+
+    document.getElementById("result").innerHTML = result;
+  }
+
+  
+  //강사님의 코드
+  function salary() {
+      // 1. 입력
+      name = document.getElementById("name").value;
+      hour = document.getElementById("hour").value;
+      pay = document.getElementById("pay").value;
+      hour = parseInt(hour);
+      pay = parseInt(pay);
+      
+      // 2. 계산
+      normalpay = hour * pay;
+      overpay = 0;
+      if(hour > 20){
+          overpay = (hour-20)*pay/2;
+        }
+        
+        // 3.출력
+        temp = `${name}의 기본급은 ${normalpay}이고 수당은 ${overpay}이고 총액은 ${normalpay+overpay}입니다.`;
+        document.getElementById("result2").innerHTML = temp;
+    }
+
+    function goClear() {
+        document.getElementById("name").value="";
+        document.getElementById("hour").value="";
+        document.getElementById("pay").value="";
+        document.getElementById("result2").innerHTML="";
+    }
+
+// 내가 짠 코드
+//   function salary() {
+//     name = document.getElementById("name").value;
+//     hour = document.getElementById("hour").value;
+//     pay = document.getElementById("pay").value;
+    
+//     normalpay = 0;
+//     overpay = 0;
+//     sum = 0;
+//     if (hour > 20) {
+//         normalpay = parseInt(pay) * 20;
+//         overpay = (parseInt(hour) - 20) * parseInt(pay) * 0.5;
+//         sum = overpay + normalpay;
+//         document.getElementById("result2").innerHTML =
+//         "기본급 : " + normalpay + " 초과수당 : " + overpay + " 합계 : " + sum;
+//     } else {
+//         result = parseInt(pay) * parseInt(hour);
+//         document.getElementById("result2").innerHTML =
+//         "기본급 : " + result + " 초과수당 : " + 0 + " 합계 : " + result;
+//     }
+// }
+
+</script>
