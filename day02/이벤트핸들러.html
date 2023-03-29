@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button type="button" onclick="goDisplay()">누르세요</button><br />
+    <button type="button" id="btnPress">함수표현식</button><br />
+    <button type="button" id="btnPress2">화살표함수</button><br />
+    
+
+    <!-- <button>누르세요</button><br /> -->
+    <!-- <input type="submit"> 위에랑 얘랑 같음 -->
+    
+    
+    <!-- <input type="button">  이벤트만 발생시킨다 -->
+    <!-- <button type="button"></button>  이렇게 두 개가 같음-->
+  </body>
+</html>
+<script>
+  function goDisplay() {
+    alert("button 눌림");
+  }
+
+  // 초창기에는 script를 헤더에 놓았음
+  // 버튼 객체 있는데 나중에 함수를 붙인다.
+  window.onload = function () {
+    document.getElementById("btnPress").addEventListener('click',function () {
+      alert("두 번째 버튼");
+    });
+    
+    document.getElementById("btnPress2").addEventListener('click',() =>{
+      alert("세 번째 버튼");
+    });
+  };
+</script>

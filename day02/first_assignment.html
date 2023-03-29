@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>과제</h1>
+</body>
+</html>
+
+<script>
+    let work = [
+        {"name":"홍길동", "time":40, "pay":10000},
+        {"name":"임꺽정", "time":15, "pay":20000},
+        {"name":"장길산", "time":20, "pay":20000},
+        {"name":"강감찬", "time":30, "pay":15000},
+        {"name":"이순신", "time":40, "pay":30000}
+    ];
+
+
+    for(i of work) {
+        i["sum"] = i["time"] * i["pay"];
+    }
+
+    for (i of work) {
+        console.log(`이름 : ${i["name"]} 근무시간 : ${i["time"]} 시간당급여액 : ${i["pay"]} 총액 : ${i["sum"]}`);
+    }
+
+    let a = work.map((a)=> {
+        a.sum = a.time * a.pay;
+        a.avg = a.sum / a.time;
+        return a;
+    });
+    a.forEach(a=>(console.log(a)));
+
+</script>

@@ -36,4 +36,14 @@
   s.forEach((e)=> {
     console.log(`${s[i].name}  ${s[i].total}`);
   });
+
+
+  
+  s.map((item)=> {
+        item.total = item.kor + item.mat + item.eng;
+        item.avg = item.total/3;
+        return item;
+    }).forEach(item=>{
+        console.log(`${item.name} 총점 ${item.total} 평균 ${item.avg}`);
+    });
 </script>
