@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<body>
+    이름 : <input type = "text" name = "nvalue" id = "name"><br>
+    국어 : <input type = "text" name = "kvalue" id = "kor"><br>
+    영어 : <input type = "text" name = "evalue" id = "eng"><br>
+    수학 : <input type = "text" name = "mvalue" id = "math"><br>
+
+    <button type = "button" id = "cal" onclick = "result()">결과확인</button>
+    <div id = "result"></div>
+
+</body>
+</html>
+
+<script>
+    function result() {
+        // 끌고오기
+        name = document.getElementById("name").value;
+        kor = document.getElementById("kor").value;
+        eng = document.getElementById("eng").value;
+        math = document.getElementById("math").value;
+
+        //계산하기
+        if(kor>100 || kor<0){
+            document.getElementById("kor").value = "";
+            alert("0~100사이의 수를 입력하세요");
+            return false;
+        }else if (eng>100 || eng<0){
+            document.getElementById("eng").value = "";
+            alert("0~100사이의 수를 입력하세요");
+            return false;
+        }else if (math>100 || math<0){
+            document.getElementById("math").value = "";
+            alert("0~100사이의 수를 입력하세요");
+            return false;
+        } else{
+        result = parseInt(kor) + parseInt(eng) + parseInt(math);
+        avg = result/3;};
+
+        //출력하기
+        document.getElementById("result").innerHTML = 
+        `${name}의 총점은 ${result} 이고 평균은 ${avg}입니다.`;
+    }
+
+    $(document).ready(()=>{
+        $("#cal").click(()=>{
+            name = $("#name").val();
+            kor = parseInt($("#kor").val());
+            eng = parseInt($("#eng").val());
+            math = parseInt($("#math").val());
+            if(kor>100 || kor<0){
+            $("#kor").val("");
+            alert("0~100사이의 수를 입력하세요");
+            return false;
+        }else if (eng>100 || eng<0){
+            $("#eng").val("");
+            alert("0~100사이의 수를 입력하세요");
+            return false;
+        }else if (math>100 || math<0){
+            $("#math").val("");
+            alert("0~100사이의 수를 입력하세요");
+            return false;
+        } else{
+            sum = kor + eng + math;
+            avg = sum/3;
+            $("#result").html(`${name}의 총점은 ${sum}이고 평균은 ${avg}이다.`);
+        }})
+    })
+</script>
