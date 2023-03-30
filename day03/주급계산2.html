@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  </head>
+  <body>
+    이름 : <input type="text" id="name" /><br />
+    근무시간 : <input type="text" id="workTime" /><br />
+    시간당급여액 : <input type="text" id="hourPay" /><br />
+
+    <button type="button" id="btnConfirm">확인</button>&nbsp;&nbsp;
+    <button type="button" id="btnClear">새로입력</button><br />
+
+    <div id="result"></div>
+  </body>
+</html>
+
+<script>
+  $(document).ready(() => {
+    $("#btnConfirm").click(() => {
+      name = $("#name").val();
+      time = parseInt($("#workTime").val());
+      pay = parseInt($("#hourPay").val());
+      result = time * pay;
+      overpay = 0;
+      if(time>20){
+        overpay = (time-20) * pay * 0.5;
+      }
+      $("#result").html(`${name}의 급여는 ${result} 초과수당은 ${overpay}입니다.`);
+    });
+    $("#btnClear").click(() => {
+        $("input").val("");
+        // input = document.getElementsByTagName("input");  자바스크립트로는 이렇게 짜야함
+        // for(i=0;i<input.length;i++){
+        //     input[i].value="";
+        // }
+        $("#result").html("");
+    });
+  });
+</script>
