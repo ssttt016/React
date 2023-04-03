@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <th>이름</th>
+            <th>국어</th>
+            <th>영어</th>
+            <th>수학</th>
+            <th>합계</th>
+        </thead>
+        <tbody>
+            <%for(board of scoreData){ %>
+                <tr>
+                    <td><%=board.name%></td>
+                    <td><%=board.kor%></td>
+                    <td><%=board.eng%></td>
+                    <td><%=board.mat%></td>
+                    <td><%=board.sum%></td>
+                    <!-- <td><%=board.kor+board.eng+board.mat%></td> -->
+
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>
