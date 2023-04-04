@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- name, id 둘다 가능하다 -->
+    <form name="myform" id="myform">
+
+    <h3><%=title%></h3>
+
+    <table>
+        <%for(guestbook of guestbookList){%>
+        <tr>
+            <td><%=guestbook["id"]%></td>
+            <td><a href="/view/<%=guestbook['id']%>"><%=guestbook["title"]%></a></td>
+            <td><%=guestbook["writer"]%></td>
+            <td><%=guestbook["wdate"]%></td>
+        </tr>
+        <%}%>
+    </table>
+
+    <br><br>
+    
+    <!-- button 태그에는 type="button", submit, reset
+    submit 속성을 주면 - 무조건 서버로 전송하기 때문에 글도 안쓰고 글쓰기 버튼 누르면 계속 빈데이터를 
+    서버로 날려보내기때문에 중간에 제목쓰세요, 내용은 몇글자이상쓰세요 이런문자를 내보내고 싶다
+    자바스크립트가 담당해서 해야햐는데 submit을 쓰면 무조건 전송 테스트가 필요한 경우에 submit 를 
+    쓰지 않는다  
+    <button >글쓰기</button> 이건 무조건 submit 로 알아듣는다 
+
+    -->
+    <button type="button" onclick="goWrite()">글쓰기</button>
+
+    </form>
+</body>
+</html>
+
+
+<script>
+    function goWrite()
+    {
+        //location.href="/view/1";
+
+        //1.form 태그 객체를 가져온다 
+        var frm = document.myform;  //name속성일때 
+        //var frm = document.getElementById("myform"); //id 속성일때
+
+        frm.action="/write";
+        frm.method="get";
+        frm.submit(); //서버로 정보를 전송한다 
+    }
+</script>

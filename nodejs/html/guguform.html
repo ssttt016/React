@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="myform" action="/gugu" method="get">
+        <input type="hidden" name="operator" id="operator">
+        <input type="text" name="dan" id="dan"><br>
+
+        <button type="button" id="gugu">구구단</button>
+    </form>
+</body>
+</html>
+<script>
+    window.onload = ()=>{
+        let gugu = document.getElementById("gugu");
+
+        gugu.addEventListener("click", ()=>{
+            document.getElementById("operator").value = "gugudan";
+            // document.myform.submit();
+            document.forms[0].submit();  //새로운 방식 폼 자체가 html내에 갯수만큼 배열화되어있어 가능
+        })
+    }
+</script>
