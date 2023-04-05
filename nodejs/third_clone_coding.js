@@ -44,7 +44,7 @@ app.post("/write", (req,res)=>{
     var writer = req.body.writer;
     var contents = req.body.contents;
     var wdate = req.body.wdate;
-    var id = guestbookLisk.length+1;
+    var id = guestbookList.length+1;
 
     guestbookList.push( {title:title, contents: contents,writer:writer, wdate:wdate, id:id});
     res.redirect("/list"); //글 작성 후 목록으로 이동한다.
