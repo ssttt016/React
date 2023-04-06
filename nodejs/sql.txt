@@ -1,0 +1,9 @@
+// mysql_install_db --datadir=C:\mariadb\data --service=mariaDBZip --port=3306
+
+// CREATE DATABASE mydb default CHARACTER SET UTF8;
+
+// create user 사용자계정 identified by '비밀번호';
+// create user user01 identified by 1234;
+
+// 권한 부여한다. mydb에 대한 모든 접근 권한을 계정명@localhost;
+// GRANT ALL PRIVILEGES ON mydb.* TO user01@localhost; 
