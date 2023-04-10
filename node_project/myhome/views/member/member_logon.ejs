@@ -34,7 +34,7 @@
 	    
        <button type="button" class="btn btn-primary" id="btnLogon">로그온</button>&nbsp;&nbsp;
       
-	    <button type="button" class="btn btn-primary" onclick="goCancel()">취소</button>&nbsp;&nbsp;
+	    <button type="button" class="btn btn-primary" id="btnCancel">취소</button>&nbsp;&nbsp;
 	  </div>
 	</div>
 </form>	
@@ -44,31 +44,66 @@
 </html>
 
 <script>
-$(document).ready( ()=>{
-  $("#btnLogon").click(()=>{
-    let userid = $("#userid").val();
-    let password = $("#password").val();
+$(document).ready(()=>{
+  $("#btnLogon").click(goLogon); //goLogon() - 함수를 실행한 결과가 전달
+                                 // goLogon - 함수의 주소만 전달한다
+  $("#btnCancel").click(goCancel); 
+})
 
-    $.ajax({
-      url:"/member/logoncheck",
-      data:{userid:userid, password:password},
-      method:"post",
-      dataType:"json"
-    }).then((result)=> {
-      if(result.result == "success")
-      {
-        alert("로그인 성공.");
-      }
-      else
-      {
-        alert("로그인 실패")
-      }
-    })
-    .catch((res, status, error)=>{
-      console.log(status);
-    })
-  });
+function goLogon() {
+  $.ajax({
+    url:"/member/login",
+    data:{userid:$("#userid").val(), password:$("#password").val()},
+    dataType:"json",
+    method:"post"
   })
+  .done((res)=>{
+    console.log(res.result);
+    if(res.result=="success"){
+      alert(res.msg);
+      location.href="/";
+    }else {
+      alert(res.msg);
+    }
+  })
+  .fail((res, status, error)=>{
+    console.log( status)
+  })
+}
+
+function goCancel() {
+
+}
+
+
+
+// 내가 만든 로그인
+
+// $(document).ready( ()=>{
+//   $("#btnLogon").click(()=>{
+//     let userid = $("#userid").val();
+//     let password = $("#password").val();
+
+//     $.ajax({
+//       url:"/member/login",
+//       data:{userid:userid, password:password},
+//       method:"post",
+//       dataType:"json"
+//     }).then((result)=> {
+//       if(result.result == "success")
+//       { 
+//         alert("로그인 성공.");
+//       }
+//       else
+//       {
+//         alert("로그인 실패")
+//       }
+//     })
+//     .catch((res, status, error)=>{
+//       console.log(status);
+//     })
+//   });
+//   })
 
 
 </script>
