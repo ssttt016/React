@@ -29,7 +29,7 @@ function getPaging(pg, totalCnt, pageGroupSize=10) {
    return {pnTotal:pnTotal, pnStart:pgGroupStart, pnEnd:pgGroupEnd, pg:pg}
 }  
 
-// for(i=1; i<=32; i++)
-//   getPaging(i, 320);
+for(i=1; i<=32; i++)
+  getPaging(i, 320);
 
 exports.getPaging = getPaging;
