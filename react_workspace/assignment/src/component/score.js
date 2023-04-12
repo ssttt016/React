@@ -7,6 +7,7 @@ function Score(props) {
     const [mat, setMat] = useState(0);
     const [sum, setSum] = useState(0);
     const [avg, setAvg] = useState(0);
+    const [result, setResult] = useState("");
 
     const nameChange = (e) =>{
         setName(e.target.value);
@@ -27,6 +28,8 @@ function Score(props) {
     const calChange = () => {
             setSum(kor+eng+mat);
             setAvg((kor+eng+mat)/3);
+
+            setResult(`${name}의 총점은 ${sum}이고 평균은 ${avg}이다.`);
     }
     return (
         <div>
@@ -39,6 +42,7 @@ function Score(props) {
             <p>{name}의 총점은 {kor+eng+mat} 평균은 {(kor+eng+mat)/3}이다.</p>
             <h3>버튼 누른 결과</h3>
             <p>{name}의 총점은 {sum} 평균은 {avg}이다.</p>
+            <div>{result}</div>
         </div>
     );
 }
