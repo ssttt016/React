@@ -5,49 +5,45 @@ import { SERVERIP } from "../../CommonUtil";
 import {Link, useNavigate, useParams} from "react-router-dom";
 
 
-function BoardWrite(props) {
+function HeroWrite(props) {
     let {id} = useParams(); //보내는 쪽에서 json객체로 보냄
     let history = useNavigate();
 
-    const [title, setTitle] = useState("");
-    const [writer, setWriter] = useState("");
-    const [contents, setContents] = useState("");
+    const [heroName, setHeroName] = useState("");
+    const [heroDesc, setHeroDesc] = useState("");
 
     //BoardWrite 컴포넌트가 /board/write 일때는 undefined가 오고 /board/view/1 id에는 1이 온다.
     useEffect(() => {
         console.log('id', id);
         async function loadData(id){
-            let results = await axios.get(SERVERIP+"/rest_board/view/"+id);
+            let results = await axios.get(SERVERIP+"/hero/view/"+id);
+            // console.log(results.data.hero.hero_name);
+            // console.log(results.data.hero.hero_desc);
             console.log(results);
 
-            setTitle(results.data.title);
-            setWriter(results.data.writer);
-            setContents(results.data.contents);
+            setHeroName(results.data.hero.hero_name);
+            setHeroDesc(results.data.hero.hero_desc);
         }   
         if(id!= undefined) //write가 아니고 view로 호출할 때
         loadData(id); 
       }, []); 
     
-    const titleChange = (e)=>{
-        setTitle(e.target.value);
+    const nameChange = (e)=>{
+        setHeroName(e.target.value);
     }
 
-    const writerChange = (e)=>{
-        setWriter(e.target.value);
-    }
-
-    const contentsChange = (e)=>{
-        setContents(e.target.value);
+    const descChange = (e)=>{
+        setHeroDesc(e.target.value);
     }
 
     // 서버로 전송하기
     const postData = ()=>{
         // 데이터를 JSON으로 묶어서 보내야 한다.
-        let data = {title,writer, contents};
-        axios.post(SERVERIP+"/rest_board/write", data)
+        let data = {"hero_name":heroName,"hero_desc":heroDesc};
+        axios.post(SERVERIP+"/hero/write", data)
         .then( (res)=>{
             console.log(res.data);
-            history("/board/list/1")
+            history("/hero/list")
         })
         .catch((error)=>{
             console.log(error);
@@ -64,26 +60,18 @@ function BoardWrite(props) {
             </colgroup>
             <tbody>
               <tr>
-                <td>타이틀</td>
+                <td>이름</td>
                 <td>
                     <div className="mb-3" style={{marginTop:"13px"}}>
-                        <input type="text" className="form-control" placeholder="타이틀을 입력하세요" onChange={titleChange} />
+                        <input type="text" className="form-control" value={heroName} placeholder="이름을 입력하세요" onChange={nameChange} />
                     </div>
                 </td>
               </tr>       
               <tr>
-                <td>작성자</td>
+                <td>업적</td>
                 <td>
                     <div className="mb-3" style={{marginTop:"13px"}}>
-                        <input type="text" className="form-control" placeholder="이름을 입력하세요" onChange={writerChange} />
-                    </div>
-                </td>
-              </tr>
-              <tr>
-                <td>내용</td>
-                <td>
-                    <div className="mb-3" style={{marginTop:"13px"}}>
-                        <input type="text" className="form-control" placeholder="내용을 입력하세요" onChange={contentsChange} />
+                        <input type="text" className="form-control" value={heroDesc} placeholder="업적을 입력하세요" onChange={descChange} />
                     </div>
                 </td>
               </tr>
@@ -97,4 +85,4 @@ function BoardWrite(props) {
         </div>
     );
 }
-export default BoardWrite;
+export default HeroWrite;

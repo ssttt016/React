@@ -3,24 +3,43 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { SERVERIP } from "../../CommonUtil";
 import {Link} from "react-router-dom";
+import Pagination from "react-js-pagination";
+import "../../Page.css"
 
 function BoardList(props) {
     const [boardList, setBoardList] = useState([]);
+    const [totalCnt, setTotalCnt] = useState(0);
+    const [pg, setPg] = useState(0);
     const [loading, setLoading] = useState(false);
 
-    useEffect(()=>{
-        async function loadData (){
-        const url = SERVERIP+"/hero/list";
-        await axios.get(url)
-        .then((res)=>{
-            setBoardList(res.data);
-            setLoading(true);
-        })
-        .catch((error)=>{
-            console.log(error);
-        })
-    }
-    loadData();
+    const loadData = async (pg)=>{
+      const url = SERVERIP+"/rest_board/list/"+pg;
+      await axios.get(url)
+      .then((res)=>{
+        let totalCnt = res.data.totalCnt;
+        let pg = res.data.pg;
+        let boardList = res.data.boardList;
+        console.log("데이터전체갯수 : ", totalCnt);
+        console.log("현재페이지 : ", pg);
+        console.log("데이터 : ", boardList);
+
+        setTotalCnt(totalCnt);
+        setPg(pg);
+        setBoardList(boardList);
+        setLoading(true);
+      })
+      .catch((error)=>{
+          console.log(error);
+      })
+  }
+
+  const goPage = (pg)=>{
+    setPg(pg);
+    loadData(pg);
+  }
+
+  useEffect(()=>{
+    loadData(1);
     }, [])
 
     return (
@@ -40,11 +59,18 @@ function BoardList(props) {
           </div>
 
         <table className="table table-hover ">
+          <colgroup>
+              <col width="8%"/>
+              <col width="*"/>
+              <col width="14%"/>
+              <col width="14%"/>
+          </colgroup>
             <thead className="table-secondary">
               <tr>
-                <th>ID</th>
-                <th>영웅</th>
-                <th>업적</th>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
               </tr>
             </thead>
             <tbody>
@@ -54,8 +80,9 @@ function BoardList(props) {
                         return(
                             <tr key={index}>
                                 <td>{item.id}</td>
-                                <td><Link to={"/board/view/"+item.id}>{item.hero_name}</Link></td>
-                                <td>{item.hero_desc}</td>
+                                <td><Link to={"/board/view/"+item.id}>{item.title}</Link></td>
+                                <td>{item.username}</td>
+                                <td>{item.wdate}</td>
                             </tr>
                         )
                     })
@@ -63,6 +90,18 @@ function BoardList(props) {
                     }
             </tbody>
           </table>
+
+          <Pagination
+             activePage={pg}
+             itemsCountPerPage={10}
+             totalItemsCount={totalCnt}
+             pageRangeDisplayed={5}
+             prevPageText={"<"}
+             nextPageText={">"}
+             onChange={goPage}
+             firstPageText={"<<"}
+             lastPageText={">> "}
+          />
           <div>
             <Link className="btn btn-danger" to="/board/write">글쓰기</Link>
           </div>

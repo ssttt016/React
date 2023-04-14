@@ -35,6 +35,7 @@ router.get("/list/:pg", async function (req, res, next) {
   res.render("board/board_list.ejs", {session:req.session, boardList: results, totalCnt:totalCnt, pg:pg, paging:commonUtil.getPaging(pg, totalCnt)});
 });
 
+
 router.get("/view/:id", async function (req, res, next) {
   let id = req.params.id;
   let sql = `select id, title, writer, contents, 

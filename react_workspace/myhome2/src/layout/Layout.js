@@ -12,10 +12,10 @@ function Layout(props) {
               <NavLink className="nav-link active" to="/">Home</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/board/list">게시판</NavLink>
+              <NavLink className="nav-link" to="/board/list/1">게시판</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/board/write">글쓰기</NavLink>
+              <NavLink className="nav-link" to="/hero/list">영웅</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link disabled" href="#">Disabled</NavLink>
