@@ -40,6 +40,7 @@ app.use( session({
 app.use(cors()); // 보다 정밀하게 받는 방법 찾아서 작성해야함
 //현재는 아무데서나 요청오면 다 받음
 
+app.use("/uploads", express.static("uploads"));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/board', boardRouter);
